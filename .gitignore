@@ -63,3 +63,6 @@
 /drush
 /drupal.phar
 /drupal
+
+# Custom ignore rules
+.DS_Store

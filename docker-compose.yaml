@@ -1,0 +1,43 @@
+name: devops-drupal-app
+
+services:
+  drupal:
+    image: drupal:10
+    container_name: drupal
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./web:/var/www/html
+    depends_on:
+      - db
+    environment:
+      - DRUPAL_DB_HOST=db
+      - DRUPAL_DB_NAME=drupal
+      - DRUPAL_DB_USER=drupal
+      - DRUPAL_DB_PASSWORD=drupalpassword
+
+  db:
+    image: mariadb:10.6
+    container_name: drupal-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupalpassword
+    volumes:
+      - db-data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: rootpassword
+
+volumes:
+  db-data:

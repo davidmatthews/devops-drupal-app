@@ -19,7 +19,8 @@ FROM drupal:10
 WORKDIR /var/www/html
 
 # Copy built app from builder stage
-COPY --from=builder /app /var/www/html
+RUN rm -rf /opt/drupal/web/*
+COPY --from=builder /app/* /opt/drupal/web
 
 # Fix file permissions
 RUN chown -R www-data:www-data /var/www/html

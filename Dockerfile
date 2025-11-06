@@ -20,7 +20,7 @@ WORKDIR /var/www/html
 
 # Copy built app from builder stage
 RUN rm -rf /opt/drupal/web/*
-COPY --from=builder /app/* /opt/drupal/web
+COPY --from=builder /app/ /opt/drupal/web
 
 # Fix file permissions
 RUN chown -R www-data:www-data /var/www/html

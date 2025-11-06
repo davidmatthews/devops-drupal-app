@@ -2,7 +2,8 @@ name: devops-drupal-app
 
 services:
   drupal:
-    image: drupal:10
+    build:
+      context: .
     container_name: drupal
     restart: always
     ports:
@@ -21,6 +22,8 @@ services:
     image: mariadb:10.6
     container_name: drupal-db
     restart: always
+    ports:
+      - "8083:80"
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: drupal

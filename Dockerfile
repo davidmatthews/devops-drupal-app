@@ -11,7 +11,7 @@ RUN composer install --no-dev --ignore-platform-req=ext-* \
   --optimize-autoloader --no-interaction --no-progress
 
 # Copy the full Drupal codebase
-COPY web /app
+COPY web /app/web
 
 # Stage 2: Runtime
 FROM drupal:10
